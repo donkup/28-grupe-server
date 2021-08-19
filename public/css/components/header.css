@@ -8,7 +8,6 @@ header {
   position: sticky;
   top: 0;
   z-index: 1;
-  text-shadow: 0 1px 3px red;
 }
 header .logo {
   width: 40px;
@@ -19,7 +18,7 @@ header .logo {
 
 header nav {
   line-height: 40px;
-  color: black;
+  color: #36f;
   text-decoration: none;
 }
 header nav.user-section {
