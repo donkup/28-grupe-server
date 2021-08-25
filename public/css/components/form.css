@@ -110,7 +110,8 @@
   background-color: var(--primary-color);
   border-radius: 4px;
   cursor: pointer;
+  background-color: #14d;
 }
 .form > .form-row > button[type='submit']:hover {
-  background-color: #14d;
+  background-color: rgb(51, 221, 17);
 }
