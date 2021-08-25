@@ -54,6 +54,9 @@ function responseAction(response) {
         }
         localStorage.setItem('login-token', responseObject.token);
         showMessage('success', 'Token gautas ;)');
+        setTimeout(() => {
+            location.href = '/admin';
+        }, 2000)
     } catch (error) {
         showMessage('error', 'Serverio klaida!');
     }
