@@ -1,3 +1,4 @@
+
 import { ajax } from "./ajax.js";
 
 const formMessageDOM = document.querySelector('.form-messages');
@@ -5,12 +6,16 @@ const pFormMessageDOM = formMessageDOM.querySelector('.message');
 const closeMessageDOM = formMessageDOM.querySelector('.close');
 const formDOM = document.querySelector('.form');
 const serviceNameDOM = document.getElementById('service_name');
-const urlSlugDOM = document.getElementById('slug');
-const shortDescDOM = document.getElementById('short_desc');
-const fullDescDOM = document.getElementById('full_desc');
+const slugDOM = document.getElementById('slug');
+const shortDescriptionDOM = document.getElementById('short_desc');
+const fullDescriptionDOM = document.getElementById('full_desc');
 const priceDOM = document.getElementById('price');
 const isActiveDOM = document.getElementById('is_active');
 const submitDOM = document.querySelector('button');
+
+
+
+
 
 function showMessage(state, msg) {
     const allowedStates = ['info', 'success', 'error'];
@@ -29,44 +34,48 @@ function submitFormInfo(e) {
     e.preventDefault();
 
     const serviceName = serviceNameDOM.value;
-    const urlSlug = urlSlugDOM.value;
-    const shortDesc = shortDescDOM.value;
-    const fullDesc = fullDescDOM.value;
+    const urlSlug = slugDOM.value;
+    const shortDescription = shortDescriptionDOM.value;
+    const fullDescription = fullDescriptionDOM.value;
     const price = priceDOM.value;
     const isActive = isActiveDOM.checked;
 
+
     if (isActive) {
         if (serviceName === '') {
-            return showMessage('error', '"ServiceName" negali buti tuscias');
+            return showMessage('error', '"serviceName" negali buti tuscias');
+
         }
         if (urlSlug === '') {
-            return showMessage('error', '"UrlSlug" negali buti tuscias');
+            return showMessage('error', '"urlSlug" negali buti tuscias');
         }
-        if (shortDesc === '') {
-            return showMessage('error', '"ShortDesc" negali buti tuscias');
+        if (shortDescription === '') {
+            return showMessage('error', '"shortDescription" negali buti tuscias');
+
         }
-        if (fullDesc === '') {
-            return showMessage('error', '"FullDesc" negali buti tuscias');
+        if (fullDescription === '') {
+            return showMessage('error', '"fullDescription" negali buti tuscias');
+
         }
         if (price === '') {
-            return showMessage('error', '"Price" negali buti tuscias');
-        }
-    } else {
-        if (serviceName === '') {
-            return showMessage('error', '"ServiceName" negali buti tuscias');
-        }
-        if (urlSlug === '') {
-            return showMessage('error', '"UrlSlug" negali buti tuscias');
+            return showMessage('error', '"price" negali buti tuscias');
+
         }
     }
-
-
+    else {
+        if (serviceName === '') {
+            return showMessage('error', '"serviceName" negali buti tuscias');
+        }
+        if (urlSlug === '') {
+            return showMessage('error', '"urlSlug" negali buti tuscias');
+        }
+    }
     closeMessage();
     ajax({
         method: 'POST',
         headers: {},
         endpoint: 'api/services',
-        data: { serviceName, urlSlug, shortDesc, fullDesc, price, isActive }
+        data: { serviceName, urlSlug, shortDescription, fullDescription, price, isActive }
     }, responseAction);
 }
 
@@ -75,8 +84,9 @@ function responseAction(response) {
         const responseObject = JSON.parse(response);
         if (responseObject.error) {
             showMessage('error', responseObject.error);
-            return
+            return;
         }
+
         showMessage('success', 'Paslauga sekmingai prideta!');
 
         location.href = '/admin/services';

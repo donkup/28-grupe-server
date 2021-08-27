@@ -1,80 +1,32 @@
+
 import { ajax } from "./ajax.js";
 
-const itemDOM = document.querySelectorAll('.item');
-console.log(itemDOM);
-
-
-function showMessage(state, msg) {
-    const allowedStates = ['info', 'success', 'error'];
-    if (allowedStates.includes(state)) {
-        formMessageDOM.classList.add('show');
-        formMessageDOM.dataset.state = state;
-        pFormMessageDOM.innerText = msg;
-    }
+const itemsDOM = document.querySelectorAll('.item');
+for (const item of itemsDOM) {
+    const deleteDOM = item.querySelector('.fa-trash')
+    deleteDOM.addEventListener("click", (e) => {
+        ajax({
+            method: 'DELETE',
+            headers: {},
+            endpoint: 'api/services?urlSlug=' + item.id,
+        }, responseAction);
+    })
 }
 
-function closeMessage() {
-    formMessageDOM.classList.remove('show');
-}
-
-function submitFormInfo(e) {
-    e.preventDefault();
-
-    const serviceName = serviceNameDOM.value;
-    const urlSlug = urlSlugDOM.value;
-    const shortDesc = shortDescDOM.value;
-    const fullDesc = fullDescDOM.value;
-    const price = priceDOM.value;
-    const isActive = isActiveDOM.checked;
-
-    if (isActive) {
-        if (serviceName === '') {
-            return showMessage('error', '"ServiceName" negali buti tuscias');
-        }
-        if (urlSlug === '') {
-            return showMessage('error', '"UrlSlug" negali buti tuscias');
-        }
-        if (shortDesc === '') {
-            return showMessage('error', '"ShortDesc" negali buti tuscias');
-        }
-        if (fullDesc === '') {
-            return showMessage('error', '"FullDesc" negali buti tuscias');
-        }
-        if (price === '') {
-            return showMessage('error', '"Price" negali buti tuscias');
-        }
-    } else {
-        if (serviceName === '') {
-            return showMessage('error', '"ServiceName" negali buti tuscias');
-        }
-        if (urlSlug === '') {
-            return showMessage('error', '"UrlSlug" negali buti tuscias');
-        }
-    }
-
-
-    closeMessage();
-    ajax({
-        method: 'POST',
-        headers: {},
-        endpoint: 'api/services',
-        data: { serviceName, urlSlug, shortDesc, fullDesc, price, isActive }
-    }, responseAction);
-}
 
 function responseAction(response) {
     try {
         const responseObject = JSON.parse(response);
         if (responseObject.error) {
-            showMessage('error', responseObject.error);
-            return
+            alert(responseObject.error)
+            return;
         }
-        showMessage('success', 'Paslauga sekmingai prideta!');
 
-        location.href = '/admin/services';
+        alert('Paslauga sekmingai istrinta!')
+
+        location.reload()
 
     } catch (error) {
-        showMessage('error', 'Serverio klaida!');
+        alert('Serverio klaida!')
     }
 }
-
