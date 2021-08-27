@@ -1,16 +1,8 @@
 import { ajax } from "./ajax.js";
 
-const formMessageDOM = document.querySelector('.form-messages');
-const pFormMessageDOM = formMessageDOM.querySelector('.message');
-const closeMessageDOM = formMessageDOM.querySelector('.close');
-const formDOM = document.querySelector('.form');
-const serviceNameDOM = document.getElementById('service_name');
-const urlSlugDOM = document.getElementById('slug');
-const shortDescDOM = document.getElementById('short_desc');
-const fullDescDOM = document.getElementById('full_desc');
-const priceDOM = document.getElementById('price');
-const isActiveDOM = document.getElementById('is_active');
-const submitDOM = document.querySelector('button');
+const itemDOM = document.querySelectorAll('.item');
+console.log(itemDOM);
+
 
 function showMessage(state, msg) {
     const allowedStates = ['info', 'success', 'error'];
@@ -86,10 +78,3 @@ function responseAction(response) {
     }
 }
 
-closeMessageDOM.addEventListener('click', closeMessage);
-
-submitDOM.addEventListener('click', submitFormInfo);
-
-// showMessage('info', 'Labas');
-// showMessage('success', 'Tau pavyko!');
-// showMessage('error', 'Kazkur yra klaida!');
