@@ -1,4 +1,3 @@
-
 import { ajax } from "./ajax.js";
 
 const itemsDOM = document.querySelectorAll('.item');
