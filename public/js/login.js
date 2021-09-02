@@ -1,4 +1,3 @@
-
 import { ajax } from "./ajax.js";
 
 const formMessageDOM = document.querySelector('.form-messages');

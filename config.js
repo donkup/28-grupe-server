@@ -5,11 +5,10 @@ environments.dev = {
     envName: 'dev',
     hashingSecret: 'dummy-secret',
 }
-
 environments.production = {
     httpPort: 5000,
     envName: 'production',
-    hashingSecret: 'super-secret-salt-for-production-please-change-it-before-using-it-thanks',
+    hashingSecret: 'super-secrect-salt-forproduction-bla-bla-pakeisk-pries-using',
 }
 
 const currentEnv = typeof process.env.NODE_ENV === 'string' ? process.env.NODE_ENV.toLowerCase() : '';

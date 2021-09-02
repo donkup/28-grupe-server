@@ -1,3 +1,4 @@
+
 function ajax(request, callback) {
     const { method, headers, endpoint, data } = request;
     const methods = ['GET', 'POST', 'PUT', 'DELETE'];
